@@ -71,7 +71,7 @@ module.exports ={
         return res.json({sens});
     },
 
-    async empresa(req,res){
+    async negocios(req,res){
         const {empresa} = req.query;
 
         const sens = await Vag.find({

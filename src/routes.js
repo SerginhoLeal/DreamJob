@@ -13,7 +13,7 @@ routes.post('/NRBQlog6f2Pwnqe3adQJ', AuthController.store);
 routes.use(authMiddleware);
 
 routes.get('/C7Ypo2iYtfLi8RrH1TRR', VagasController.perfil);
-routes.get('/kW24SJmbA6surYp5qWPJ', VagasController.empresa);
+routes.get('/kW24SJmbA6surYp5qWPJ', VagasController.negocios);
 
 routes.get('/8dr7YKjlJ3aXKcnwGJrm', VagasController.index);
 routes.post('/C7Ypo2iFU0OTT7RrH1TR', VagasController.store);
