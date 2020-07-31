@@ -17,6 +17,10 @@ const UserSchema = new Schema({
         required: false,
         select:false,
     },
+    curriculo:{
+        type: String,
+        required: true,
+    },
     codigo:{
         type: String,
         required: true,
