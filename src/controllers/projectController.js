@@ -50,8 +50,40 @@ module.exports ={
     },
 
     async update(req, res){
-        const user = await Vag.findByIdAndUpdate(req.params.id, req.body, {new:true});
-        return res.json(user);
+        const { user } = req.headers;
+        const n = await Bus.findById(user);
+        const {
+            empresa, 
+            desenvolvedor, 
+            beneficios, 
+            wpps,
+            mai,
+            picture,
+            latitude,
+            longitude,
+        } = req.body;
+
+        try{
+            const location = {
+                type: 'Point',
+                coordinates: [longitude, latitude],
+            }
+
+            const user = await Vag.findByIdAndUpdate(req.params.id, {
+                codigo:n.codigo,
+                empresa,
+                desenvolvedor, 
+                beneficios, 
+                wpps,
+                mai, 
+                picture,
+                location
+            }, {new:true});
+            return res.json(user);
+        }catch(err){
+            console.log(err)
+            return res.status(400).send({error:'fail'});
+        }
     },
 
     async destroy(req,res){
