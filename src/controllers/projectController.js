@@ -4,7 +4,8 @@ const Vag = mongoose.model('Vaga');
 
 module.exports ={
     async index(req, res){
-        const Vagas = await Vag.paginate({},{page:1, limit:10});
+        const pages = req.query.page || 1;
+        const Vagas = await Vag.paginate({},{page:pages, limit:10});
         return res.json(Vagas);
     },
 
