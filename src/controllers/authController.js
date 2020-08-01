@@ -32,12 +32,14 @@ module.exports = {
     },
 
     async store(req, res){
-        const {name} = req.body;
+        const {name,email,password,curriculo} = req.body;
     try{
         if(await Grap.findOne({name}))//se encontrar um email o cadastro não será realizado
             return res.status(400).send({error:'Name já em uso!'});
 
-        const user = await Grap.create(req.body);
+        const tente = Math.floor(Math.random() * 10000000) + 3
+
+        const user = await Grap.create({name,email,password,curriculo,codigo:tente});
 
         res.send({
             user,
