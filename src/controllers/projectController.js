@@ -5,7 +5,7 @@ const Vag = mongoose.model('Vaga');
 module.exports ={
     async index(req, res){
         // const pages = req.query.page || 1;
-        const docs = await Vag.find();
+        const docs = await Vag.find().sort( { data: -1 } )
         return res.json(docs);
     },
 
