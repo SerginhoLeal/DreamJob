@@ -6,7 +6,7 @@ module.exports ={
     async index(req, res){
         // const pages = req.query.page || 1;
         const docs = await Vag.find();
-        return res.json({docs});
+        return res.json(docs);
     },
 
     async store(req, res){
