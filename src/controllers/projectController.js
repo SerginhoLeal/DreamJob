@@ -46,7 +46,8 @@ module.exports ={
         return res.send(user);
 
         }catch(err){
-            return res.statusCode(400).send({error:'fail'});
+            console.log(err)
+            return res.status(400).send({error:'fail'});
         }
     },
 

@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 
 const PointSchema = require('./PointSchema');
 
-const mongoosePaginate = require('mongoose-paginate-v2')
-
 const VagaSchema = new mongoose.Schema({
     codigo:{
         type: String,
@@ -42,7 +40,5 @@ const VagaSchema = new mongoose.Schema({
         default:Date.now,
     },
 });
-
-VagaSchema.plugin(mongoosePaginate)
 
 mongoose.model('Vaga', VagaSchema);
