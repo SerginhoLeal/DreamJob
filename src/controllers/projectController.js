@@ -2,11 +2,20 @@ const mongoose = require('mongoose');
 const Bus = mongoose.model('Usuario');
 const Vag = mongoose.model('Vaga');
 
+const {findConnections, sendMessage} = require('../../Websocket')
+
 module.exports ={
     async index(req, res){
         // const pages = req.query.page || 1;
-        const docs = await Vag.find().sort( { data: -1 } )
-        return res.json(docs);
+        const {tipo} = req.query;
+
+        const docs = await Vag.find({
+            tipo:{
+                $in:tipo,
+            },
+        }).sort( { data: -1 } )
+
+        return res.json({docs});
     },
 
     async store(req, res){
@@ -32,7 +41,10 @@ module.exports ={
             coordinates: [longitude, latitude],
         }
 
+        const EmpresaSocket = "empresa"
+
         const user = await Vag.create({
+            tipo:EmpresaSocket,
             codigo:n.codigo,
             empresa,
             desenvolvedor, 
@@ -42,6 +54,12 @@ module.exports ={
             picture,
             location
         });
+
+        const sendSocketMessageTo = findConnections(
+            EmpresaSocket,
+        );
+        // console.log(sendSocketMessageTo);
+        sendMessage(sendSocketMessageTo, 'new-project', user)
         
         return res.send(user);
 

@@ -5,7 +5,11 @@ const mongoose = require('mongoose');
 const requireDir = require('require-dir');
 const cors = require('cors');
 
+const http = require('http');
+const {setupWebsocket} = require('./Websocket');
 const app = express();
+const server = http.Server(app);
+setupWebsocket(server);
 
 app.use(express.json());
 
@@ -23,4 +27,4 @@ requireDir('./src/models');
 
 app.use('/', require('./src/routes'));
 
-app.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3000);

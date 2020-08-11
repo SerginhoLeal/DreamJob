@@ -19,7 +19,7 @@ const UserSchema = new Schema({
     },
     curriculo:{
         type: String,
-        required: true,
+        required: false,
     },
     codigo:{
         type: String,

@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const PointSchema = require('./PointSchema');
 
 const VagaSchema = new mongoose.Schema({
+    tipo:{
+        type: String,
+        required: true,
+    },
     codigo:{
         type: String,
         required: true,
