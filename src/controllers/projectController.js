@@ -107,8 +107,19 @@ module.exports ={
     },
 
     async destroy(req,res){
-        await Vag.findByIdAndRemove(req.params.id);
-        return res.send();
+        const { user } = req.headers;
+        const { id } = req.params;
+
+        const n = await Bus.findById(user);
+        const m = await Vag.findById(id);
+        
+        n.codigo === m.codigo 
+            ?
+        await Vag.findByIdAndRemove(req.params.id) && 
+        res.send()
+            :
+        res.status(400).send({error:'fail'});
+
     },
 
     async perfil(req,res){
