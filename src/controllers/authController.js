@@ -18,10 +18,10 @@ module.exports = {
         const user = await Grap.findOne({name}).select('+password');
         
         if(!user)
-            return res.status(400).json({error:'Nome inexistente'});
+            return res.status(400).send({error:'Nome inexistente'});
         
         if(!await bcrypt.compare(password, user.password))
-            return res.status(400).json({error:'Senha invalida'});
+            return res.status(400).send({error:'Senha invalida'});
         
         user.password = undefined;
 
