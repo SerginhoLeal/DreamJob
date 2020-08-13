@@ -14,8 +14,8 @@ function generateToken(params = {}){
 module.exports = {
     async login(req, res){
         const {name, password} = req.body;
-
-        const user = await Grap.findOne({name}).select('+password');
+        try{
+            const user = await Grap.findOne({name}).select('+password');
         
         if(!user)
             return res.status(400).send({error:'Nome inexistente'});
@@ -29,6 +29,9 @@ module.exports = {
             user,
             token:generateToken({id: user.id}),
         });
+        }catch{
+            return res.status(400).send({error:'fail'});
+        }
     },
 
     async store(req, res){
@@ -49,7 +52,7 @@ module.exports = {
         user.password = undefined;
 
         }catch(err){
-            return res.status(400).send({error:'fail........................................'});
+            return res.status(400).send({error:'fail'});
         }
     },
 };
