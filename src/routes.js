@@ -12,6 +12,8 @@ routes.post('/NRBQlog6f2Pwnqe3adQJ', AuthController.store);
 
 routes.use(authMiddleware);
 
+routes.put('/nqe3adNRBQlog6f2PwQJ/:userUpdate', AuthController.updateuser);
+
 routes.get('/C7Ypo2iYtfLi8RrH1TRR', VagasController.perfil);
 routes.get('/kW24SJmbA6surYp5qWPJ', VagasController.negocios);
 

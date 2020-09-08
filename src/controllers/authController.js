@@ -55,4 +55,35 @@ module.exports = {
             return res.status(400).send({error:'fail'});
         }
     },
+
+    async updateuser(req, res){
+        const { user } = req.headers;
+        const { userUpdate } = req.params;
+
+        const n = await Grap.findById(user);
+        const m = await Grap.findById(userUpdate);
+
+
+        const {
+            name,
+            email,
+            password,
+            curriculo,
+        } = req.body;
+
+        const hash = await bcrypt.hash(password, 10);
+
+        if(n.codigo === m.codigo){
+            const user = await Grap.findByIdAndUpdate(req.params.userUpdate, {
+                name,
+                email,
+                password:hash,
+                curriculo,
+                codigo:m.codigo
+            }, {new:true});
+            return res.json(user);
+        }
+
+        return res.json({error:'fail'});
+    }
 };
