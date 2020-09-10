@@ -63,13 +63,20 @@ module.exports = {
         const n = await Grap.findById(user);
         const m = await Grap.findById(userUpdate);
 
-
         const {
             name,
             email,
             password,
             curriculo,
         } = req.body;
+
+        if(password === "")
+            return res.status(400).send({error:'falha_senha_vazia'});
+
+        /*
+            oldPassword
+            newPassword
+        */
 
         const hash = await bcrypt.hash(password, 10);
 
